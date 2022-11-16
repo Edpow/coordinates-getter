@@ -17,31 +17,43 @@ btClearMaior70.addEventListener("click",() => {textMaior70.value = ""})
 btDownload.addEventListener("click", () => {handleCSVFiles()})
 
 function addAte70LatLongString() {
-  getLocation();
-  if (currentPosition === "") {
-    alert("Posição atual não capturada")
-  } else {
-    textAte70.value = textAte70.value +"\n" + currentPosition;
-    currentPosition=""
-  }
-
+  // getLocation();
+  // if (currentPosition === "") {
+  //   alert("Posição atual não capturada")
+  // } else {
+  //   textAte70.value = textAte70.value +"\n" + currentPosition;
+  //   currentPosition=""
+  // }
+  var lat,lon;
+  var promise1 = new Promise(function(resolve, reject) {
+      navigator.geolocation.getCurrentPosition(function(pos){
+          lat = pos.coords.latitude
+          lon = pos.coords.longitude
+          resolve({lat,lon});
+      }) 
+  })
+  
+  promise1.then(function(value) {
+    textAte70.value = textAte70.value +"\n" + value.lat + "," + value.lon;
+  });
 }
 
 function addMaior70LatLongString() {
-  getLocation();
-  if (currentPosition === "") {
-    alert("Posição atual não capturada")
-  } else {
-  textMaior70.value = textMaior70.value +"\n"  + currentPosition;
-  currentPosition=""
-  }
+    // getLocation();
+    if (currentPosition === "") {
+      // alert("Posição atual não capturada")
+      getLocation()
+    } else {
+    textMaior70.value = textMaior70.value +"\n"  + currentPosition;
+    currentPosition=""
+    }
 }
 
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(handlePosition);
   } else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
+    alert("Geolocation is not supported by this browser.");
   }
 }
 
@@ -59,3 +71,5 @@ function saveCSVFiles(csvContent){
   console.log(encodedUri);
   window.open(encodedUri);
 }
+
+
