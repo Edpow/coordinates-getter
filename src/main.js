@@ -40,13 +40,26 @@ function addAte70LatLongString() {
 
 function addMaior70LatLongString() {
     // getLocation();
-    if (currentPosition === "") {
-      // alert("Posição atual não capturada")
-      getLocation()
-    } else {
-    textMaior70.value = textMaior70.value +"\n"  + currentPosition;
-    currentPosition=""
-    }
+    // if (currentPosition === "") {
+    //   alert("Posição atual não capturada")
+    //   getLocation()
+    // } else {
+    // textMaior70.value = textMaior70.value +"\n"  + currentPosition;
+    // currentPosition=""
+    // }
+
+    var lat,lon;
+    var promise2 = new Promise(function(resolve, reject) {
+        navigator.geolocation.getCurrentPosition(function(pos){
+            lat = pos.coords.latitude
+            lon = pos.coords.longitude
+            resolve({lat,lon});
+        }) 
+    })
+    
+    promise2.then(function(value) {
+      textMaior70.value = textAte70.value +"\n" + value.lat + "," + value.lon;
+    });
 }
 
 function getLocation() {
