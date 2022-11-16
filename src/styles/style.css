@@ -15,7 +15,11 @@
   -webkit-text-size-adjust: 100%;
 }
 
-div {
+body {
   display: inline;
 }
 
+button {
+  height: 50px;
+  width: 350px;
+}
