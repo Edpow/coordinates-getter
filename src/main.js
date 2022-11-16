@@ -34,7 +34,7 @@ function addAte70LatLongString() {
   })
   
   promise1.then(function(value) {
-    textAte70.value = textAte70.value +"\n" + value.lat + "," + value.lon;
+    textAte70.value = value.lat + "," + value.lon + "\n" + textAte70.value;
   });
 }
 
@@ -58,7 +58,7 @@ function addMaior70LatLongString() {
     })
     
     promise2.then(function(value) {
-      textMaior70.value = textMaior70.value +"\n" + value.lat + "," + value.lon;
+      textMaior70.value = value.lat + "," + value.lon + "\n" + textMaior70.value;
     });
 }
 
