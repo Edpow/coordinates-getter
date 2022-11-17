@@ -44,7 +44,6 @@ main {
 }
 
 main textarea {
-  resize: none;
   display:flex;
   width: 12rem;
   height: 35rem;
