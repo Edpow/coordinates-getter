@@ -6,23 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+<header>
+  <h1>Coordinates Getter</h1>
+</header>
 <body>
-  <button id="download">Download Coordinates</button>
-  <div>
-    <button id="btAte70">Capturar</button>
-    <button id="btClearAte70">Clear</button>
-    <h1>Caixas com até 70cm</h1>
-    <textarea id="textAte70" oninput="auto_grow(this)" rows="30" cols="50"></textarea>
-  </div>
-  <div>
-    <button id="btMaior70">Capturar</button>
-    <button id="btClearMaior70">Clear</button>
-    <h1>Caixas maiores que 70cm</h1>
-    <textarea id="textMaior70" oninput="auto_grow(this)" rows="30" cols="50"></textarea>
-  </div>
-
+  <aside>
+    <button id="btDownload">Download Coordinates</button>
+    <button id="btClear">Clear</button>
+    <button id="btGetCoordinate">Capturar</button>
+    <select id="selectedOption">
+        <option value="Até 70cm">Até 70cm</option>
+        <option value="Maior 70cm">Maior 70cm</option>
+    </select>
+  </aside>
+  <main>
+    <div>
+      <textarea id="textCoordinates" placeholder="Click em Capturar para iniciar..."></textarea>
+    </div>
+  </main>
+</body>
+<footer>
   <h2>Link afiliado</h2>
   <a target="_blank" href="https://www.amazon.com.br/b?_encoding=UTF8&tag=engritadecass-20&linkCode=ur2&linkId=80469abee5c25d6105832072558ef1bb&camp=1789&creative=9325&node=17242603011">Amazon</a>
-</body>
+</footer>
 <script type="module" src="/src/main.js"></script>
 </html>

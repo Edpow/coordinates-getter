@@ -1,82 +1,41 @@
 import './styles/style.css'
 
-const textAte70 = document.getElementById("textAte70");
-const btAte70 = document.getElementById("btAte70");
-const btClearAte70 = document.getElementById("btClearAte70");
-const textMaior70 = document.getElementById("textMaior70");
-const btMaior70 = document.getElementById("btMaior70");
-const btClearMaior70 = document.getElementById("btClearMaior70");
-const btDownload = document.getElementById("download");
-var currentPosition = "";
-getLocation();
+const btClear = document.getElementById("btClear");
+const btGetCoordinate = document.getElementById("btGetCoordinate");
+const btDownload = document.getElementById("btDownload");
+const textCoordinates = document.getElementById("textCoordinates");
+const selectedOption = document.getElementById("selectedOption");
 
-btAte70.addEventListener("click", () => {addAte70LatLongString()})
-btMaior70.addEventListener("click", () => {addMaior70LatLongString()})
-btClearAte70.addEventListener("click",() => {textAte70.value = ""})
-btClearMaior70.addEventListener("click",() => {textMaior70.value = ""})
-btDownload.addEventListener("click", () => {handleCSVFiles()})
+btGetCoordinate.addEventListener("click", () => {fetchCurrentCoordinate()})
+btClear.addEventListener("click", () => {handleClearText()})
+btDownload.addEventListener("click",() => {handleCSVFiles()})
 
-function addAte70LatLongString() {
-  // getLocation();
-  // if (currentPosition === "") {
-  //   alert("Posição atual não capturada")
-  // } else {
-  //   textAte70.value = textAte70.value +"\n" + currentPosition;
-  //   currentPosition=""
-  // }
-  var lat,lon;
-  var promise1 = new Promise(function(resolve, reject) {
-      navigator.geolocation.getCurrentPosition(function(pos){
-          lat = pos.coords.latitude
-          lon = pos.coords.longitude
-          resolve({lat,lon});
+function fetchCurrentCoordinate() {
+  var promise = new Promise(function(resolve, reject) {
+      navigator.geolocation.getCurrentPosition(function(position){
+          const latitude = position.coords.latitude
+          const longitude = position.coords.longitude
+          resolve({latitude,longitude});
       }) 
   })
-  
-  promise1.then(function(value) {
-    textAte70.value = value.lat + "," + value.lon + "\n" + textAte70.value;
+  promise.then(function(position){
+    handlePosition(position);
   });
 }
 
-function addMaior70LatLongString() {
-    // getLocation();
-    // if (currentPosition === "") {
-    //   alert("Posição atual não capturada")
-    //   getLocation()
-    // } else {
-    // textMaior70.value = textMaior70.value +"\n"  + currentPosition;
-    // currentPosition=""
-    // }
-
-    var lat,lon;
-    var promise2 = new Promise(function(resolve, reject) {
-        navigator.geolocation.getCurrentPosition(function(pos){
-            lat = pos.coords.latitude
-            lon = pos.coords.longitude
-            resolve({lat,lon});
-        }) 
-    })
-    
-    promise2.then(function(value) {
-      textMaior70.value = value.lat + "," + value.lon + "\n" + textMaior70.value;
-    });
-}
-
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(handlePosition);
-  } else {
-    alert("Geolocation is not supported by this browser.");
-  }
-}
-
-
 function handlePosition(position) {
-  currentPosition = position.coords.latitude + "," + position.coords.longitude;
+  textCoordinates.value = selectedOption.value + "," + position.latitude + "," + position.longitude + "\n" + textCoordinates.value;
+}
+
+function handleClearText(){
+  const answer = confirm("Deseja realmente apagar o conteúdo? Esta ação é irreversível...");
+  if (answer) {
+    textCoordinates.value=""
+  };
 }
 
 function handleCSVFiles() {
-  saveCSVFiles("data:text/csv;charset=utf-8," + "Caixa até 70cm" + "\n\n" + textAte70.value + "\n\n" + "Caixa Maiores que 70cm" +  "\n\n" +  textMaior70.value);
+  saveCSVFiles("data:text/csv;charset=utf-8," + textCoordinates.value);
 }
 
 function saveCSVFiles(csvContent){
