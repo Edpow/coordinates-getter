@@ -76,7 +76,7 @@ function handlePosition(position) {
 }
 
 function handleCSVFiles() {
-  saveCSVFiles("data:text/csv;charset=utf-8," + "Caixa até 70cm"  + textAte70.value + "\n\nCaixa Maiores que 70cm" +  textMaior70.value);
+  saveCSVFiles("data:text/csv;charset=utf-8," + "Caixa até 70cm" + "\n\n" + textAte70.value + "\n\n" + "Caixa Maiores que 70cm" +  "\n\n" +  textMaior70.value);
 }
 
 function saveCSVFiles(csvContent){
