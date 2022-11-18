@@ -12,6 +12,7 @@ btDownload.addEventListener("click",() => {handleCSVFiles()})
 
 function fetchCurrentCoordinate() {
   var promise = new Promise(function(resolve, reject) {
+    btGetCoordinate.disabled=true;
       navigator.geolocation.getCurrentPosition(function(position){
           const latitude = position.coords.latitude
           const longitude = position.coords.longitude
@@ -20,6 +21,7 @@ function fetchCurrentCoordinate() {
   })
   promise.then(function(position){
     handlePosition(position);
+    btGetCoordinate.disabled=false;
   });
 }
 
