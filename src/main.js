@@ -37,13 +37,20 @@ function handleClearText(){
 }
 
 function handleCSVFiles() {
-  saveCSVFiles("data:text/csv;charset=utf-8," + textCoordinates.value);
+  saveCSVFiles(textCoordinates.value);
 }
 
 function saveCSVFiles(csvContent){
-  var encodedUri = encodeURI(csvContent);
-  console.log(encodedUri);
-  window.open(encodedUri);
+  var hiddenElement = document.createElement('a');
+  hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
+  hiddenElement.target = '_blank';
+  hiddenElement.download = getDocumentName() + '.csv';
+  hiddenElement.click();
 }
 
+function getDocumentName(){
+  var documentName = prompt("Insira um nome para o arquivo", "Coordinates");
+  if (documentName === null) {documentName = "Coordinates"};
+  return(documentName)
+}
 
