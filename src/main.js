@@ -40,9 +40,10 @@ function handleCSVFiles() {
   saveCSVFiles(textCoordinates.value);
 }
 
+// read about utf-8 BOM
 function saveCSVFiles(csvContent){
   var hiddenElement = document.createElement('a');
-  hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvContent);
+  hiddenElement.href = 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURI(csvContent);
   hiddenElement.target = '_blank';
   hiddenElement.download = getDocumentName() + '.csv';
   hiddenElement.click();
