@@ -9,7 +9,7 @@
 <header>
   <h1>Coordinates Getter</h1>
 </header>
-<body>
+<body onbeforeunload="return handleReload()">
   <aside>
     <button id="btDownload">Download Coordinates</button>
     <button id="btClear">Clear</button>
@@ -24,6 +24,11 @@
       <textarea id="textCoordinates" placeholder="Click em Capturar para iniciar..."></textarea>
     </div>
   </main>
+  <script>
+    function handleReload() {
+      return "Dados serão perdidos...";
+    }
+    </script>
 </body>
 <footer>
   <h2>Link afiliado</h2>

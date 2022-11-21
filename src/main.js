@@ -10,6 +10,10 @@ btGetCoordinate.addEventListener("click", () => {fetchCurrentCoordinate()})
 btClear.addEventListener("click", () => {handleClearText()})
 btDownload.addEventListener("click",() => {handleCSVFiles()})
 
+function handleReload() {
+  return "Os dados serão perdidos..."
+}
+
 function fetchCurrentCoordinate() {
   var promise = new Promise(function(resolve, reject) {
     btGetCoordinate.disabled=true;
